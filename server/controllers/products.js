@@ -1,10 +1,10 @@
 const mongoose = require('mongoose'),
-        Author = mongoose.model('Author');
+        Product = mongoose.model('Product');
 
 module.exports = {
 
     retrieveAll : (req, res) => {
-        Author.find({}, (err, items) => {
+        Product.find({}, (err, items) => {
             if (!err) {
                 res.json({message: "Success", data: items});
             } else {
@@ -16,7 +16,7 @@ module.exports = {
 
     retrieveById: (req, res) => {
         var ObjectId = mongoose.Types.ObjectId; 
-        Author.find({_id: new ObjectId(req.params.id)})
+        Product.find({_id: new ObjectId(req.params.id)})
             .exec((err, item)=>{
                 if (!err) {
                     res.json({message: "Success", data: item});
@@ -28,9 +28,11 @@ module.exports = {
     },
     
     create: (req, res) => {
-        let item = new Author();
+        let item = new Product();
         item._id = new mongoose.Types.ObjectId();
         item.name = req.body.name;
+        item.price = req.body.price;
+        item.image_url = req.body.image_url;
         item.save( err => {
             if (!err) {
                 res.json({message: "Success", data: item})
@@ -43,7 +45,7 @@ module.exports = {
 
     updateById: (req, res) => {
         var ObjectId = mongoose.Types.ObjectId; 
-        // Author.where({_id: new ObjectId(req.params.id)})
+        // Product.where({_id: new ObjectId(req.params.id)})
         //     .update({$set: {
         //         name: req.body.name,
         //     }})
@@ -55,10 +57,13 @@ module.exports = {
         //             res.json( {message: "Error", error: err})
         //         }
         //     });
-        var update = { name: req.body.name };
+        var update = { 
+            name: req.body.name,
+            price: req.body.price,
+            image_url: req.body.image_url
+        };
         var opts = { runValidators: true };
-        Author.update({_id: new ObjectId(req.params.id)}, update, opts, function(err, item) {
-            // Operation succeeds despite the fact that 'name' is not specified
+        Product.update({_id: new ObjectId(req.params.id)}, update, opts, function(err, item) {
             if (!err) {
                 res.json({message: "Success", data: item});
             } else {
@@ -70,7 +75,7 @@ module.exports = {
 
     removeById: (req, res) => {
         var ObjectId = mongoose.Types.ObjectId; 
-        Author.remove({_id: new ObjectId(req.params.id)})
+        Product.remove({_id: new ObjectId(req.params.id)})
             .exec((err, item)=>{
                 if (!err) {
                     res.json({message: "Success", data: item});

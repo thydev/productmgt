@@ -5,12 +5,11 @@ const app = express();
 require('./server/config/mongoose');
 // End of Model Section
 
-
 const bodyParser = require('body-parser')
 app.use(bodyParser.json());
 
 var path = require('path');
-app.use(express.static(path.join(__dirname, './ngauthor/dist/ngauthor')));
+app.use(express.static(path.join(__dirname, './client/dist/client')));
 // app.use(express.static( __dirname + '/my-angular-app/dist' ));
 
 require('./server/config/routes')(app);
