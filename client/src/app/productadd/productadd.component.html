@@ -1,0 +1,21 @@
+<p>{{message}}</p>
+
+<form (submit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Product Name:
+      <input  name="product.name" [(ngModel)]="product.name" type="text" class="form-control" placeholder="Enter product name">
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="name">Product Price:
+      <input  name="product.price" [(ngModel)]="product.price" type="number" class="form-control" placeholder="Enter product price">
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="name">Image URL:
+      <input  name="product.image_url" [(ngModel)]="product.image_url" type="text" class="form-control" placeholder="">
+    </label>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

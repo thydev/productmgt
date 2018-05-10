@@ -1,0 +1,10 @@
+<ul>
+    <li *ngFor="let a of products">
+      <div>
+        <span>{{a.name}} : {{a.price}}</span>
+        <img src="{{a.image_url}}" alt="">
+        <button routerLink = "/products/edit/{{a._id}}" >Edit</button>
+        <button (click)="onDelete(a._id)" >Delete</button>
+      </div>
+    </li>
+  </ul>
